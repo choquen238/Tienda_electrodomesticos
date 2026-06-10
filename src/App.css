@@ -1,38 +1,397 @@
-.App {
-  text-align: center;
+/* ============================================================
+   TIENDA ELECTRODOMÉSTICOS — Estilos personalizados
+   Complementan Bootstrap 5 vía CDN
+   ============================================================ */
+
+/* ── Variables de diseño ── */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dk: #1d4ed8;
+  --color-accent: #f59e0b;
+  --color-price-base: #059669;
+  /* verde */
+  --color-price-sug: #d97706;
+  /* ámbar/dorado */
+  --color-navbar-bg: #0f172a;
+  /* azul marino oscuro */
+  --color-bg: #f1f5f9;
+  --color-card-bg: #ffffff;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, .08);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, .14);
+  --radius-card: 12px;
+  --transition-fast: 0.18s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ── Reset base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar-principal {
+  background-color: var(--color-navbar-bg) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  height: 56px;
+}
+
+#navbar-principal .navbar-brand {
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+}
+
+.badge-admin {
+  background-color: rgba(245, 158, 11, .18);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, .35);
+}
+
+.badge-visitante {
+  background-color: rgba(148, 163, 184, .15);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, .3);
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+.login-wrapper {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+  min-height: 100vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, .08) !important;
+  background: rgba(255, 255, 255, .97) !important;
+  backdrop-filter: blur(12px);
+}
+
+.login-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dk));
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 1.8rem;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-toggle-pass {
+  cursor: pointer;
+  transition: background var(--transition-fast);
 }
 
-@keyframes App-logo-spin {
+.btn-toggle-pass:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* ============================================================
+   PRODUCTO CARD
+   ============================================================ */
+.product-card {
+  border-radius: var(--radius-card) !important;
+  background: var(--color-card-bg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.product-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  /* padding-top se aplica dinámicamente en React según el ratio real de cada imagen */
+  overflow: hidden;
+  background: #f1f5f9;      /* fondo neutro visible cuando la imagen no llena el área */
+}
+
+.product-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* imagen completa sin recorte, respeta proporción original */
+  padding: 4px;             /* pequeño margen interno para que no toque los bordes */
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-img {
+  transform: scale(1.03);   /* zoom más sutil con contain */
+}
+
+/* ── Overlay de acciones ── */
+.product-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.product-card:hover .product-card-overlay {
+  opacity: 1;
+}
+
+/* Botones de acción individuales */
+.card-action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.88);
+  color: #334155;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+}
+
+.card-action-btn:hover {
+  background: white;
+  color: var(--color-primary);
+  transform: scale(1.12);
+}
+
+.card-action-btn--danger:hover {
+  color: #dc2626;
+}
+
+.product-card-name {
+  color: var(--color-text);
+  font-size: 0.85rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Fila de precio */
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  margin-bottom: 4px;
+}
+
+/* Precio Base — fondo verde muy suave */
+.price-row-base {
+  background: #f0fdf4;
+  border-left: 3px solid var(--color-price-base);
+}
+
+/* Precio Sugerido — fondo ámbar muy suave */
+.price-row-sug {
+  background: #fffbeb;
+  border-left: 3px solid var(--color-price-sug);
+}
+
+.price-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+/* Precios */
+.price-base {
+  color: var(--color-price-base);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.price-sugerido {
+  color: var(--color-price-sug);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.price-detail-box {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+/* ============================================================
+   ACORDEÓN DE CATEGORÍAS
+   ============================================================ */
+/* Contenedor del header de categoría */
+.accordion-cat-btn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: all var(--transition-fast);
+  color: var(--color-text);
+}
+
+.accordion-cat-btn:hover,
+.accordion-cat-btn.abierto {
+  background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, .1);
+}
+
+/* Botón interno de toggle (sin estilos de botón por defecto) */
+.accordion-cat-inner {
+  cursor: pointer;
+  color: inherit;
+  line-height: 1;
+}
+
+.accordion-cat-inner:hover {
+  color: var(--color-primary);
+}
+
+.accordion-cat-inner:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Botones de admin en el header de categoría */
+.cat-admin-btns {
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.accordion-cat-btn:hover .cat-admin-btns {
+  opacity: 1;
+}
+
+.accordion-panel {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-6px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   BUSCADOR
+   ============================================================ */
+#input-busqueda:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+  border-color: var(--color-primary);
+}
+
+/* ============================================================
+   MODALES
+   ============================================================ */
+.modal-content {
+  border-radius: 16px !important;
+}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+#main-content {
+  min-height: calc(100vh - 56px);
+}
+
+/* ============================================================
+   SCROLLBAR PERSONALIZADO (navegadores Chromium)
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ============================================================
+   RESPONSIVIDAD MÓVIL
+   ============================================================ */
+@media (max-width: 576px) {
+
+  /* ── Nombre ── */
+  .product-card-name {
+    font-size: 0.75rem;
+  }
+
+  /* ── Precios ── */
+  .price-base    { font-size: 0.78rem; }
+  .price-sugerido { font-size: 0.84rem; }
+  .price-row { padding: 3px 6px; }
+
+  /* ── Overlay: siempre visible en táctil, gradiente corto ── */
+  .product-card-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 42%);
+    gap: 5px;
+    padding-bottom: 6px;
+  }
+
+  /* ── Botones de acción: círculos más pequeños y discretos ── */
+  .card-action-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.22);
+    background: rgba(255,255,255,.80);
+  }
+
+  /* ── Botones de admin de categoría ── */
+  .cat-admin-btns {
+    opacity: 1;
+  }
+
+  .cat-admin-btns .btn {
+    padding: 2px 6px;
+    font-size: 0.68rem;
   }
 }
