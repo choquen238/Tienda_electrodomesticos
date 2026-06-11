@@ -7,6 +7,37 @@ import CategoryModal from './CategoryModal';
 import ConfirmModal from './ConfirmModal';
 
 /**
+ * Devuelve el nombre de clase del BootstrapIcon que mejor representa
+ * una categoría basada en palabras clave en su nombre.
+ */
+function getCategoryIcon(nombre = '') {
+  const n = nombre.toLowerCase();
+  if (n.includes('refrig') || n.includes('nevera') || n.includes('congel') || n.includes('frío'))
+    return 'bi-thermometer-snow';
+  if (n.includes('lavar') || n.includes('lavand') || n.includes('secar') || n.includes('lavadora'))
+    return 'bi-droplet-half';
+  if (n.includes('cocin') || n.includes('horno') || n.includes('microon') || n.includes('estufa') || n.includes('lica'))
+    return 'bi-fire';
+  if (n.includes('climat') || n.includes('aire') || n.includes('ventil') || n.includes('calef'))
+    return 'bi-wind';
+  if (n.includes('pequeñ') || n.includes('tostador') || n.includes('cafetera') || n.includes('plancha') || n.includes('electro'))
+    return 'bi-plug-fill';
+  if (n.includes('tv') || n.includes('telev') || n.includes('entret') || n.includes('audio') || n.includes('sonido'))
+    return 'bi-tv';
+  if (n.includes('comput') || n.includes('laptop') || n.includes('tecnol') || n.includes('inform'))
+    return 'bi-laptop';
+  if (n.includes('iluminac') || n.includes('luz') || n.includes('lámpara') || n.includes('foco'))
+    return 'bi-lightbulb';
+  if (n.includes('aspiir') || n.includes('aspira') || n.includes('limpiez'))
+    return 'bi-robot';
+  if (n.includes('segur') || n.includes('cámara') || n.includes('alarm'))
+    return 'bi-shield-check';
+  if (n.includes('batidor') || n.includes('mezcl') || n.includes('amasar'))
+    return 'bi-cup-hot';
+  return 'bi-grid-3x3-gap-fill'; // default
+}
+
+/**
  * Componente principal de listado de productos.
  * Incluye: búsqueda, acordeón por categoría, CRUD de productos y categorías.
  * Props:
@@ -277,7 +308,7 @@ function ProductList({ modalCrear, onCerrarCrear }) {
                   aria-expanded={abierto}
                   aria-controls={`accordion-panel-${cat.id}`}
                 >
-                  <i className="bi bi-grid-3x3-gap-fill text-primary"></i>
+                  <i className={`bi ${getCategoryIcon(cat.nombre)} text-primary`}></i>
                   <span className="fw-bold fs-6">{cat.nombre}</span>
                   <span className="badge bg-primary rounded-pill" style={{ fontSize: '0.7rem' }}>
                     {cat.productos.length}

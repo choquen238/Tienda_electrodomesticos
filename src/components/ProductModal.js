@@ -30,6 +30,11 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
   const [guardando, setGuardando] = useState(false);
   const [msgError, setMsgError] = useState('');
 
+  // Toggle de visibilidad solo para precio base en modo Ver
+  const [verBase, setVerBase] = useState(false);
+
+  const PRECIO_OCULTO = '••••••';
+
   // Cargar datos cuando cambia el producto o modo
   useEffect(() => {
     if (producto && (modo === 'ver' || modo === 'editar')) {
@@ -47,6 +52,8 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
     }
     setErrores({});
     setMsgError('');
+    // Resetear precio base oculto al abrir
+    setVerBase(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [producto, modo, visible]);
 
@@ -159,18 +166,35 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
                     <p className="text-muted mb-4">{form.descripcion || 'Sin descripción.'}</p>
 
                     <div className="row g-3">
-                      <div className="col-6">
-                        <div className="price-detail-box">
-                          <div className="price-label small text-muted mb-1">Precio Base</div>
-                          <div className="price-base fw-bold fs-5">{formatPrecio(form.precio_base)}</div>
+                      {/* Precio Sugerido — siempre visible (verde / prominente) */}
+                      <div className="col-12 col-sm-6">
+                        <div className="price-detail-box price-row-sug">
+                          <div className="price-label mb-1">Precio Sugerido</div>
+                          <span className="price-sugerido fs-5">{formatPrecio(form.precio_sugerido)}</span>
                         </div>
                       </div>
-                      <div className="col-6">
-                        <div className="price-detail-box">
-                          <div className="price-label small text-muted mb-1">Precio Sugerido</div>
-                          <div className="price-sugerido fw-bold fs-5">{formatPrecio(form.precio_sugerido)}</div>
+
+                      {/* Precio Base — clic en cualquier parte del contenedor */}
+                      <div className="col-12 col-sm-6">
+                        <div
+                          className="price-detail-box price-row-base"
+                          onClick={() => setVerBase(v => !v)}
+                          style={{ cursor: 'pointer' }}
+                          role="button"
+                          title={verBase ? 'Ocultar precio base' : 'Ver precio base'}
+                        >
+                          <div className="price-label mb-1">Precio Base</div>
+                          <div className="d-flex align-items-center gap-2">
+                            {verBase
+                              ? <span className="price-base fs-5">{formatPrecio(form.precio_base)}</span>
+                              : <span className="price-hidden fs-5">{PRECIO_OCULTO}</span>
+                            }
+                            <i className={`bi ${verBase ? 'bi-eye-slash' : 'bi-eye'} price-toggle-icon`}></i>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Stock */}
                       <div className="col-6">
                         <div className="price-detail-box">
                           <div className="price-label small text-muted mb-1">Stock</div>

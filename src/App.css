@@ -140,40 +140,28 @@ body {
   transform: scale(1.03);   /* zoom más sutil con contain */
 }
 
-/* ── Overlay de acciones ── */
-.product-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 55%);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 8px;
-  padding-bottom: 10px;
-  opacity: 0;
-  transition: opacity 0.22s ease;
-}
-
-.product-card:hover .product-card-overlay {
-  opacity: 1;
-}
-
-/* Botones de acción individuales */
+/* ── Botones de acción: base común ── */
 .card-action-btn {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.90);
   color: #334155;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+  backdrop-filter: blur(6px);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(0,0,0,.22);
+  position: absolute;         /* cada botón se ubica absolutamente dentro del wrapper */
+  opacity: 0;                 /* oculto por defecto, se muestra al hover */
+}
+
+.product-card:hover .card-action-btn {
+  opacity: 1;
 }
 
 .card-action-btn:hover {
@@ -184,6 +172,51 @@ body {
 
 .card-action-btn--danger:hover {
   color: #dc2626;
+}
+
+/* Botón Ver — esquina superior derecha */
+.card-btn-ver {
+  top: 8px;
+  right: 8px;
+}
+
+/* Columna de botones admin — esquina superior izquierda */
+.card-admin-col {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.product-card:hover .card-admin-col {
+  opacity: 1;
+}
+
+/* Botones dentro de la columna admin (posición relativa al flex) */
+.card-btn-admin {
+  position: relative;   /* override del absolute del padre */
+  top: auto;
+  left: auto;
+  opacity: 1;           /* la visibilidad la controla .card-admin-col */
+}
+
+/* Botón Ver — fondo azul sólido para contrastar en cualquier imagen */
+.card-btn-ver {
+  background: var(--color-primary) !important;
+  color: #ffffff !important;
+  width: 34px;
+  height: 34px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, .45);
+}
+
+.card-btn-ver:hover {
+  background: var(--color-primary-dk) !important;
+  color: #ffffff !important;
+  transform: scale(1.12);
 }
 
 .product-card-name {
@@ -206,16 +239,16 @@ body {
   margin-bottom: 4px;
 }
 
-/* Precio Base — fondo verde muy suave */
+/* Precio Base — ámbar (secundario) */
 .price-row-base {
-  background: #f0fdf4;
-  border-left: 3px solid var(--color-price-base);
-}
-
-/* Precio Sugerido — fondo ámbar muy suave */
-.price-row-sug {
   background: #fffbeb;
   border-left: 3px solid var(--color-price-sug);
+}
+
+/* Precio Sugerido — verde (principal / prominente) */
+.price-row-sug {
+  background: #f0fdf4;
+  border-left: 3px solid var(--color-price-base);
 }
 
 .price-label {
@@ -227,19 +260,55 @@ body {
   white-space: nowrap;
 }
 
-/* Precios */
+/* Precio Base — color ámbar (secundario) */
 .price-base {
-  color: var(--color-price-base);
-  font-size: 0.92rem;
+  color: var(--color-price-sug);
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
+/* Precio Sugerido — color verde (prominente) */
 .price-sugerido {
-  color: var(--color-price-sug);
+  color: var(--color-price-base);
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+/* Precio oculto — puntos de relleno */
+.price-hidden {
+  color: #94a3b8;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+/* Zona clickeable del precio (compat.) */
+.price-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 1px 3px;
+  transition: background var(--transition-fast);
+}
+
+.price-toggle:hover {
+  background: rgba(0,0,0,.05);
+}
+
+/* Hover sobre el contenedor completo de precio base */
+.price-row-base:hover {
+  filter: brightness(0.95);
+  transition: filter var(--transition-fast);
+}
+
+.price-toggle-icon {
+  font-size: 0.7rem;
+  opacity: 0.5;
 }
 
 .price-detail-box {
@@ -358,6 +427,21 @@ body {
    ============================================================ */
 @media (max-width: 576px) {
 
+  /* ── Categorías colapsadas: menos espacio vertical ── */
+  .categoria-seccion {
+    margin-bottom: 0.5rem !important;   /* reemplaza mb-4 (1.5rem) de Bootstrap */
+  }
+
+  /* Cuando está abierta, restaurar algo de espacio */
+  .categoria-seccion:has(.accordion-panel) {
+    margin-bottom: 1.2rem !important;
+  }
+
+  /* Header de categoría un poco más compacto en móvil */
+  .accordion-cat-btn {
+    padding: 7px 10px;
+  }
+
   /* ── Nombre ── */
   .product-card-name {
     font-size: 0.75rem;
@@ -368,21 +452,19 @@ body {
   .price-sugerido { font-size: 0.84rem; }
   .price-row { padding: 3px 6px; }
 
-  /* ── Overlay: siempre visible en táctil, gradiente corto ── */
-  .product-card-overlay {
-    opacity: 1;
-    background: linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 42%);
-    gap: 5px;
-    padding-bottom: 6px;
-  }
-
-  /* ── Botones de acción: círculos más pequeños y discretos ── */
+  /* ── En táctil: botones de card siempre visibles (no hay hover) ── */
   .card-action-btn {
+    opacity: 1;
     width: 26px;
     height: 26px;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     box-shadow: 0 1px 4px rgba(0,0,0,.22);
-    background: rgba(255,255,255,.80);
+    background: rgba(255,255,255,.82);
+  }
+
+  .card-admin-col {
+    opacity: 1;
+    gap: 4px;
   }
 
   /* ── Botones de admin de categoría ── */
