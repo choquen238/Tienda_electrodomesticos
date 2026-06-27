@@ -36,16 +36,16 @@ Ambos roles pueden navegar el catálogo, filtrar productos y consultar precios (
 
 ## Tecnologías Utilizadas
 
-| Tecnología | Versión | Propósito |
-|---|---|---|
-| **React** | 19.x | Framework principal de la UI |
-| **Create React App** | 5.x | Bundler y configuración de desarrollo |
-| **Supabase** | `@supabase/supabase-js ^2` | Base de datos PostgreSQL + Storage de imágenes |
-| **bcryptjs** | `^3.0` | Hash y verificación de contraseñas |
-| **Bootstrap 5** | CDN | Sistema de grilla y componentes UI |
-| **Bootstrap Icons** | CDN | Iconografía (incluyendo íconos de categorías) |
-| **Google Fonts (Inter)** | CDN | Tipografía principal |
-| **Vercel** | — | Hosting y despliegue continuo |
+| Tecnología               | Versión                    | Propósito                                      |
+| ------------------------ | -------------------------- | ---------------------------------------------- |
+| **React**                | 19.x                       | Framework principal de la UI                   |
+| **Create React App**     | 5.x                        | Bundler y configuración de desarrollo          |
+| **Supabase**             | `@supabase/supabase-js ^2` | Base de datos PostgreSQL + Storage de imágenes |
+| **bcryptjs**             | `^3.0`                     | Hash y verificación de contraseñas             |
+| **Bootstrap 5**          | CDN                        | Sistema de grilla y componentes UI             |
+| **Bootstrap Icons**      | CDN                        | Iconografía (incluyendo íconos de categorías)  |
+| **Google Fonts (Inter)** | CDN                        | Tipografía principal                           |
+| **Vercel**               | —                          | Hosting y despliegue continuo                  |
 
 ---
 
@@ -149,17 +149,17 @@ El sistema **no usa Supabase Auth**. Implementa autenticación propia mediante:
 1. El usuario ingresa `username` y `password` en el formulario de login.
 2. Se consulta la tabla `usuarios` buscando el username.
 3. Se verifica la contraseña:
-   - Si el campo `password_hash` es un hash bcrypt válido (empieza con `$2a$`, `$2b$` o `$2y$`) → se usa `bcrypt.compare()`.
-   - Si es texto plano → se compara directamente y se migra a bcrypt automáticamente.
+    - Si el campo `password_hash` es un hash bcrypt válido (empieza con `$2a$`, `$2b$` o `$2y$`) → se usa `bcrypt.compare()`.
+    - Si es texto plano → se compara directamente y se migra a bcrypt automáticamente.
 4. La sesión se guarda en `localStorage` como un objeto JSON `{ id, username, rol }`.
 5. Al recargar la página, la sesión se recupera desde `localStorage` sin necesidad de re-autenticarse.
 
 ### Roles disponibles
 
-| Rol | Descripción |
-|---|---|
-| `admin` | Control total: CRUD de productos y categorías |
-| `visitante` | Solo lectura: ver catálogo y precios |
+| Rol         | Descripción                                   |
+| ----------- | --------------------------------------------- |
+| `admin`     | Control total: CRUD de productos y categorías |
+| `visitante` | Solo lectura: ver catálogo y precios          |
 
 ---
 
@@ -281,10 +281,10 @@ Editor de recorte e imagen client-side, **sin dependencias externas**. Usa la Ca
 
 El diseño deliberado de precios en el catálogo es el siguiente:
 
-| Precio | Color | Visibilidad | Acción |
-|---|---|---|---|
-| **Sugerido** | 🟢 Verde (`#059669`) | **Siempre visible** | — |
-| **Base** | 🟡 Ámbar (`#d97706`) | Oculto (`••••••`) | Clic en el contenedor para revelar |
+| Precio       | Color                | Visibilidad         | Acción                             |
+| ------------ | -------------------- | ------------------- | ---------------------------------- |
+| **Sugerido** | 🟢 Verde (`#059669`) | **Siempre visible** | —                                  |
+| **Base**     | 🟡 Ámbar (`#d97706`) | Oculto (`••••••`)   | Clic en el contenedor para revelar |
 
 **Razón del diseño:** el precio sugerido (precio de venta al público) puede ser visto por cualquier visitante. El precio base (precio de costo/mayorista) es más sensible y se oculta para evitar que sea visible a simple vista, aunque cualquier usuario puede revelarlo con un clic.
 
@@ -318,6 +318,7 @@ Cuando el admin selecciona una imagen para un producto, **se abre automáticamen
 ### ¿Por qué?
 
 Al fotografiar productos con el celular, habitualmente:
+
 - Aparecen fondos o elementos no deseados en la foto.
 - La foto queda rotada (portrait vs. landscape) dependiendo de la orientación del dispositivo.
 
@@ -338,15 +339,15 @@ El editor permite corregir ambas cosas directamente desde la app, sin herramient
 
 ### Tecnología
 
-| Aspecto | Detalle |
-|---|---|
-| Implementación | Canvas API (`CanvasRenderingContext2D`) |
-| Dependencias npm | **Ninguna** — solo APIs nativas del navegador |
-| Formato de salida | WebP (calidad 0.92) — menor peso que JPEG con igual o mejor calidad |
-| Compatibilidad input | Mouse (desktop) + Touch (móvil/tablet) |
-| Handles de recorte | 8 puntos: 4 esquinas + 4 lados |
-| Rotación | 90° izquierda / 90° derecha, múltiples veces |
-| Guías | Líneas de tercios superpuestas |
+| Aspecto              | Detalle                                                             |
+| -------------------- | ------------------------------------------------------------------- |
+| Implementación       | Canvas API (`CanvasRenderingContext2D`)                             |
+| Dependencias npm     | **Ninguna** — solo APIs nativas del navegador                       |
+| Formato de salida    | WebP (calidad 0.92) — menor peso que JPEG con igual o mejor calidad |
+| Compatibilidad input | Mouse (desktop) + Touch (móvil/tablet)                              |
+| Handles de recorte   | 8 puntos: 4 esquinas + 4 lados                                      |
+| Rotación             | 90° izquierda / 90° derecha, múltiples veces                        |
+| Guías                | Líneas de tercios superpuestas                                      |
 
 ---
 
@@ -366,19 +367,19 @@ Cuando el usuario hace scroll hacia abajo (más de 300 px), aparece un **botón 
 
 Las categorías muestran automáticamente un ícono de Bootstrap Icons basado en palabras clave en su nombre:
 
-| Palabras clave | Ícono |
-|---|---|
-| refriger, nevera, congel, frío | ❄ `bi-thermometer-snow` |
-| lavar, lavand, secar, lavadora | 💧 `bi-droplet-half` |
-| cocin, horno, microon, estufa | 🔥 `bi-fire` |
-| climat, aire, ventil, calef | 🌬 `bi-wind` |
-| pequeñ, tostador, cafetera, plancha, electro | 🔌 `bi-plug-fill` |
-| tv, telev, entret, audio, sonido | 📺 `bi-tv` |
-| comput, laptop, tecnol, inform | 💻 `bi-laptop` |
-| iluminac, luz, lámpara, foco | 💡 `bi-lightbulb` |
-| aspira, limpiez | 🤖 `bi-robot` |
-| segur, cámara, alarm | 🛡 `bi-shield-check` |
-| Cualquier otra | ▦ `bi-grid-3x3-gap-fill` |
+| Palabras clave                               | Ícono                    |
+| -------------------------------------------- | ------------------------ |
+| refriger, nevera, congel, frío               | ❄ `bi-thermometer-snow`  |
+| lavar, lavand, secar, lavadora               | 💧 `bi-droplet-half`     |
+| cocin, horno, microon, estufa                | 🔥 `bi-fire`             |
+| climat, aire, ventil, calef                  | 🌬 `bi-wind`             |
+| pequeñ, tostador, cafetera, plancha, electro | 🔌 `bi-plug-fill`        |
+| tv, telev, entret, audio, sonido             | 📺 `bi-tv`               |
+| comput, laptop, tecnol, inform               | 💻 `bi-laptop`           |
+| iluminac, luz, lámpara, foco                 | 💡 `bi-lightbulb`        |
+| aspira, limpiez                              | 🤖 `bi-robot`            |
+| segur, cámara, alarm                         | 🛡 `bi-shield-check`     |
+| Cualquier otra                               | ▦ `bi-grid-3x3-gap-fill` |
 
 ---
 
@@ -388,7 +389,7 @@ El archivo `vercel.json` configura el enrutamiento para que funcione correctamen
 
 ```json
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
 ```
 
@@ -489,4 +490,4 @@ npm test         # Ejecutar pruebas
 
 ---
 
-*Proyecto desarrollado con React 19 + Supabase. Versión 1.0.*
+_Proyecto desarrollado con React 19 + Supabase. Versión 1.0._| Con otros cambios
