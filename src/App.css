@@ -123,7 +123,8 @@ body {
   width: 100%;
   /* padding-top se aplica dinámicamente en React según el ratio real de cada imagen */
   overflow: hidden;
-  background: #f1f5f9;      /* fondo neutro visible cuando la imagen no llena el área */
+  background: #f1f5f9;
+  /* fondo neutro visible cuando la imagen no llena el área */
 }
 
 .product-card-img {
@@ -131,13 +132,16 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;      /* imagen completa sin recorte, respeta proporción original */
-  padding: 4px;             /* pequeño margen interno para que no toque los bordes */
+  object-fit: contain;
+  /* imagen completa sin recorte, respeta proporción original */
+  padding: 4px;
+  /* pequeño margen interno para que no toque los bordes */
   transition: transform 0.3s ease;
 }
 
 .product-card:hover .product-card-img {
-  transform: scale(1.03);   /* zoom más sutil con contain */
+  transform: scale(1.03);
+  /* zoom más sutil con contain */
 }
 
 /* ── Botones de acción: base común ── */
@@ -146,7 +150,7 @@ body {
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,.90);
+  background: rgba(255, 255, 255, .90);
   color: #334155;
   display: inline-flex;
   align-items: center;
@@ -155,9 +159,11 @@ body {
   cursor: pointer;
   backdrop-filter: blur(6px);
   transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
-  box-shadow: 0 2px 6px rgba(0,0,0,.22);
-  position: absolute;         /* cada botón se ubica absolutamente dentro del wrapper */
-  opacity: 0;                 /* oculto por defecto, se muestra al hover */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .22);
+  position: absolute;
+  /* cada botón se ubica absolutamente dentro del wrapper */
+  opacity: 0;
+  /* oculto por defecto, se muestra al hover */
 }
 
 .product-card:hover .card-action-btn {
@@ -198,10 +204,12 @@ body {
 
 /* Botones dentro de la columna admin (posición relativa al flex) */
 .card-btn-admin {
-  position: relative;   /* override del absolute del padre */
+  position: relative;
+  /* override del absolute del padre */
   top: auto;
   left: auto;
-  opacity: 1;           /* la visibilidad la controla .card-admin-col */
+  opacity: 1;
+  /* la visibilidad la controla .card-admin-col */
 }
 
 /* Botón Ver — fondo azul sólido para contrastar en cualquier imagen */
@@ -297,7 +305,7 @@ body {
 }
 
 .price-toggle:hover {
-  background: rgba(0,0,0,.05);
+  background: rgba(0, 0, 0, .05);
 }
 
 /* Hover sobre el contenedor completo de precio base */
@@ -429,7 +437,8 @@ body {
 
   /* ── Categorías colapsadas: menos espacio vertical ── */
   .categoria-seccion {
-    margin-bottom: 0.5rem !important;   /* reemplaza mb-4 (1.5rem) de Bootstrap */
+    margin-bottom: 0.5rem !important;
+    /* reemplaza mb-4 (1.5rem) de Bootstrap */
   }
 
   /* Cuando está abierta, restaurar algo de espacio */
@@ -448,9 +457,17 @@ body {
   }
 
   /* ── Precios ── */
-  .price-base    { font-size: 0.78rem; }
-  .price-sugerido { font-size: 0.84rem; }
-  .price-row { padding: 3px 6px; }
+  .price-base {
+    font-size: 0.78rem;
+  }
+
+  .price-sugerido {
+    font-size: 0.84rem;
+  }
+
+  .price-row {
+    padding: 3px 6px;
+  }
 
   /* ── En táctil: botones de card siempre visibles (no hay hover) ── */
   .card-action-btn {
@@ -458,8 +475,8 @@ body {
     width: 26px;
     height: 26px;
     font-size: 0.68rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,.22);
-    background: rgba(255,255,255,.82);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .22);
+    background: rgba(255, 255, 255, .82);
   }
 
   .card-admin-col {
@@ -475,5 +492,255 @@ body {
   .cat-admin-btns .btn {
     padding: 2px 6px;
     font-size: 0.68rem;
+  }
+}
+
+/* ============================================================
+   BOTÓN FLOTANTE — VOLVER AL INICIO
+   ============================================================ */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1050;
+
+  /* Color distintivo: ámbar/naranja — diferente al azul primario */
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 16px rgba(217, 119, 6, .45);
+
+  /* Oculto por defecto: desplazado hacia abajo + invisible */
+  opacity: 0;
+  transform: translateY(20px) scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+/* Visible cuando se hizo scroll */
+.btn-scroll-top--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.btn-scroll-top:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  box-shadow: 0 6px 22px rgba(217, 119, 6, .60);
+  transform: translateY(-3px) scale(1.07);
+}
+
+.btn-scroll-top:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, .40);
+}
+
+/* Ajuste en móvil */
+@media (max-width: 576px) {
+  .btn-scroll-top {
+    bottom: 18px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ============================================================
+   EDITOR DE RECORTE DE IMAGEN (ImageCropEditor)
+   ============================================================ */
+.crop-editor-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.80);
+  z-index: 1070;
+  /* mayor que el modal de producto (1056) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  backdrop-filter: blur(5px);
+  animation: cropFadeIn 0.18s ease;
+}
+
+@keyframes cropFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.crop-editor-panel {
+  background: #1e293b;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 860px;
+  max-height: calc(100dvh - 20px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  animation: cropSlideUp 0.2s ease;
+}
+
+@keyframes cropSlideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Header ── */
+.crop-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.crop-editor-title {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  gap: 4px;
+}
+
+.crop-editor-hint {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+/* ── Botones de rotación ── */
+.crop-rotate-btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.crop-rotate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 5px 11px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+  user-select: none;
+}
+
+.crop-rotate-btn:hover {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.crop-rotate-btn:active {
+  transform: scale(0.95);
+}
+
+.crop-rotate-btn i {
+  font-size: 1rem;
+}
+
+/* ── Canvas ── */
+.crop-canvas-wrapper {
+  flex: 1;
+  min-height: 280px;
+  max-height: 520px;
+  background: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+.crop-canvas-wrapper canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Spinner mientras carga la imagen */
+.crop-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+  z-index: 2;
+}
+
+/* ── Footer ── */
+.crop-editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.crop-editor-tip {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ── Responsive móvil ── */
+@media (max-width: 576px) {
+  .crop-editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .crop-editor-hint {
+    display: none; /* demasiado texto en pantalla pequeña */
+  }
+
+  .crop-rotate-btn span {
+    display: none; /* solo ícono en móvil */
+  }
+
+  .crop-rotate-btn {
+    padding: 6px 10px;
+  }
+
+  .crop-canvas-wrapper {
+    min-height: 240px;
+    max-height: 400px;
+  }
+
+  .crop-editor-footer {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .crop-editor-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .crop-editor-tip {
+    order: -1;
   }
 }

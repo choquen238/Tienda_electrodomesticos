@@ -3,8 +3,8 @@ import { useAuth } from '../context/AuthContext';
 
 const IMAGEN_FALLBACK = 'https://placehold.co/400x300/e2e8f0/94a3b8?text=Sin+imagen';
 
-const RATIO_MIN     = 68;
-const RATIO_MAX     = 125;
+const RATIO_MIN = 68;
+const RATIO_MAX = 125;
 const RATIO_DEFAULT = 75;
 
 const PRECIO_OCULTO = '••••••';
@@ -20,7 +20,7 @@ function ProductCard({ producto, onVer, onEditar, onEliminar }) {
   const { esAdmin } = useAuth();
 
   const [paddingTop, setPaddingTop] = useState(`${RATIO_DEFAULT}%`);
-  const [verBase, setVerBase]       = useState(false);
+  const [verBase, setVerBase] = useState(false);
 
   const formatPrecio = (valor) =>
     new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(valor);
@@ -54,13 +54,13 @@ function ProductCard({ producto, onVer, onEditar, onEliminar }) {
         {/* Badges de stock */}
         {producto.stock <= 5 && producto.stock > 0 && (
           <span className="badge bg-warning text-dark position-absolute top-0 start-0 m-2 small"
-                style={{ left: esAdmin ? '52px' : '8px', top: '8px', margin: 0 }}>
+            style={{ left: esAdmin ? '52px' : '8px', top: '8px', margin: 0 }}>
             ¡{producto.stock} restantes!
           </span>
         )}
         {producto.stock === 0 && (
           <span className="badge bg-danger position-absolute small"
-                style={{ left: esAdmin ? '52px' : '8px', top: '8px', margin: 0 }}>
+            style={{ left: esAdmin ? '52px' : '8px', top: '8px', margin: 0 }}>
             Sin stock
           </span>
         )}

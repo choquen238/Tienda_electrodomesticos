@@ -3,10 +3,10 @@ import { useAuth } from '../context/AuthContext';
 
 function Login() {
   const { login } = useAuth();
-  const [username, setUsername]     = useState('');
-  const [password, setPassword]     = useState('');
-  const [error, setError]           = useState('');
-  const [cargando, setCargando]     = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [cargando, setCargando] = useState(false);
   const [mostrarPass, setMostrarPass] = useState(false);
 
   const handleSubmit = async (e) => {
