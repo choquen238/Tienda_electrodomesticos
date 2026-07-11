@@ -100,14 +100,42 @@ function ProductList({ modalCrear, onCerrarCrear }) {
 
   // En búsqueda activa mostramos todas las categorías que tengan resultados
   // Sin búsqueda mostramos todas las categorías (aunque estén vacías) para admin
+
+  /**
+   * Orden fijo para las 4 categorías principales.
+   * Las demás conservan el orden alfabético de Supabase (.order('nombre')).
+   */
+  const ORDEN_CATEGORIAS = ['refrigerador', 'lavadora frontal', 'lavadora superior', 'freezer'];
+
+  const ordenarCategorias = (cats) => {
+    return [...cats].sort((a, b) => {
+      const na = (a.nombre || '').trim().toLowerCase();
+      const nb = (b.nombre || '').trim().toLowerCase();
+      const ia = ORDEN_CATEGORIAS.indexOf(na);
+      const ib = ORDEN_CATEGORIAS.indexOf(nb);
+
+      // Ambas en la lista fija → respetar el orden de la lista
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      // Solo a está en la lista → a va primero
+      if (ia !== -1) return -1;
+      // Solo b está en la lista → b va primero
+      if (ib !== -1) return 1;
+      // Ninguna en la lista → mantener el orden alfabético original
+      return na.localeCompare(nb, 'es');
+    });
+  };
+
   const productosPorCategoria = useMemo(() => {
-    return categorias.map(cat => ({
+    const mapped = categorias.map(cat => ({
       ...cat,
       productos: productosFiltrados.filter(p => p.categoria_id === cat.id),
     })).filter(cat => {
       if (busqueda) return cat.productos.length > 0;
       return true; // admin ve categorías vacías también
     });
+
+    return ordenarCategorias(mapped);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categorias, productosFiltrados, busqueda]);
 
   /* ── Accordion toggle ── */
@@ -358,6 +386,7 @@ function ProductList({ modalCrear, onCerrarCrear }) {
                         <div key={prod.id} className="col">
                           <ProductCard
                             producto={prod}
+                            categoriaNombre={cat.nombre}
                             onVer={setModalVer}
                             onEditar={setModalEditar}
                             onEliminar={setConfirmarProd}
