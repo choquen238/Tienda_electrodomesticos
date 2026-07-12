@@ -53,7 +53,7 @@ function ProductList({ modalCrear, onCerrarCrear }) {
   const [error, setError] = useState('');
   const [busqueda, setBusqueda] = useState('');
 
-  // Acordeón: set de IDs de categorías abiertas
+  // Acordeón: set de IDs de categorías abiertas (empieza vacío = todas colapsadas)
   const [categoriasAbiertas, setCategoriasAbiertas] = useState(new Set());
 
   // ── Modales de Productos ──
@@ -83,7 +83,7 @@ function ProductList({ modalCrear, onCerrarCrear }) {
     } else {
       setCategorias(cats || []);
       setProductos(prods || []);
-      setCategoriasAbiertas(new Set((cats || []).map(c => c.id)));
+      // No abrimos categorías automáticamente: empiezan todas colapsadas
     }
 
     setCargando(false);
