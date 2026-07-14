@@ -21,8 +21,10 @@ function ProductCard({ producto, categoriaNombre = '', onVer, onEditar, onElimin
   const [paddingTop, setPaddingTop] = useState(`${RATIO_DEFAULT}%`);
   const [verBase, setVerBase] = useState(false);
 
-  const formatPrecio = (valor) =>
-    new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(valor);
+  const formatPrecio = (valor) => {
+    const num = new Intl.NumberFormat('es-BO', { maximumFractionDigits: 2 }).format(valor);
+    return `Bs ${num}`;
+  };
 
   const handleImgLoad = (e) => {
     const { naturalWidth, naturalHeight } = e.target;

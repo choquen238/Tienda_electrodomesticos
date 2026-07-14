@@ -119,8 +119,10 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
     onCerrar();
   };
 
-  const formatPrecio = (v) =>
-    new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(v);
+  const formatPrecio = (v) => {
+    const num = new Intl.NumberFormat('es-BO', { maximumFractionDigits: 2 }).format(v);
+    return `Bs ${num}`;
+  };
 
   const categoriaNombre = categorias.find(c => c.id === producto?.categoria_id)?.nombre;
 
@@ -240,9 +242,9 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
 
                     {/* Precio base */}
                     <div className="col-6">
-                      <label htmlFor="prod-precio-base" className="form-label fw-semibold">Precio Base (COP) *</label>
+                      <label htmlFor="prod-precio-base" className="form-label fw-semibold">Precio Base (Bs) *</label>
                       <div className="input-group">
-                        <span className="input-group-text">$</span>
+                        <span className="input-group-text">Bs</span>
                         <input
                           id="prod-precio-base"
                           name="precio_base"
@@ -259,9 +261,9 @@ function ProductModal({ visible, modo, producto, categorias, onCerrar, onGuardad
 
                     {/* Precio sugerido */}
                     <div className="col-6">
-                      <label htmlFor="prod-precio-sug" className="form-label fw-semibold">Precio Sugerido (COP) *</label>
+                      <label htmlFor="prod-precio-sug" className="form-label fw-semibold">Precio Sugerido (Bs) *</label>
                       <div className="input-group">
-                        <span className="input-group-text">$</span>
+                        <span className="input-group-text">Bs</span>
                         <input
                           id="prod-precio-sug"
                           name="precio_sugerido"

@@ -138,15 +138,18 @@ body {
 .product-card--horizontal {
   flex-direction: column !important;
   align-items: stretch;
-  position: relative; /* el botón Ver se posiciona relativo a la card completa */
+  position: relative;
+  /* el botón Ver se posiciona relativo a la card completa */
 }
 
 /* Mitad superior: fila con nombre + imagen */
 .pc-h-top {
   display: flex;
   flex-direction: row;
-  flex: 1 1 auto;    /* crece con el contenido del nombre */
-  overflow: visible; /* permite que el nombre largo expanda la zona */
+  flex: 1 1 auto;
+  /* crece con el contenido del nombre */
+  overflow: visible;
+  /* permite que el nombre largo expanda la zona */
 }
 
 /* Columna nombre (60%)
@@ -157,7 +160,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 32px 6px 8px 8px; /* top aumentado = alto botones (22px) + gap */
+  padding: 32px 6px 8px 8px;
+  /* top aumentado = alto botones (22px) + gap */
   min-width: 0;
 }
 
@@ -170,7 +174,8 @@ body {
 .pc-h-title {
   font-size: 0.88rem;
   font-weight: 700;
-  display: block;        /* sin -webkit-box: el texto hace wrap completo */
+  display: block;
+  /* sin -webkit-box: el texto hace wrap completo */
   overflow: visible;
   white-space: normal;
   color: var(--color-text);
@@ -183,7 +188,8 @@ body {
 .pc-h-img-wrapper {
   flex: 0 0 40%;
   max-width: 40%;
-  min-height: 90px; /* altura mínima para que la imagen siempre sea visible */
+  min-height: 90px;
+  /* altura mínima para que la imagen siempre sea visible */
   position: relative;
   background: #f1f5f9;
   overflow: hidden;
@@ -207,11 +213,13 @@ body {
 
 /* Mitad inferior (móvil): precios al 100% del ancho */
 .pc-h-prices {
-  flex: 0 0 auto;   /* altura natural según contenido */
+  flex: 0 0 auto;
+  /* altura natural según contenido */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 8px 10px 12px;  /* top | sides | bottom — espacio generoso en la parte inferior */
+  padding: 8px 10px 12px;
+  /* top | sides | bottom — espacio generoso en la parte inferior */
   border-top: 1px solid #e2e8f0;
 }
 
@@ -235,7 +243,8 @@ body {
 
 /* Botones dentro del overlay — pequeños, siempre visibles */
 .pc-h-btn-overlay .card-action-btn {
-  position: relative;   /* override del absolute global */
+  position: relative;
+  /* override del absolute global */
   top: auto;
   left: auto;
   right: auto;
@@ -323,7 +332,8 @@ body {
 /* Columna de botones admin — esquina superior izquierda, debajo del botón Ver */
 .card-admin-col {
   position: absolute;
-  top: 44px;  /* 8px top + 28px botón Ver + 8px gap */
+  top: 44px;
+  /* 8px top + 28px botón Ver + 8px gap */
   left: 8px;
   display: flex;
   flex-direction: column;
@@ -715,8 +725,13 @@ body {
 }
 
 @keyframes cropFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .crop-editor-panel {
@@ -733,8 +748,15 @@ body {
 }
 
 @keyframes cropSlideUp {
-  from { transform: translateY(16px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* ── Header ── */
@@ -855,11 +877,13 @@ body {
   }
 
   .crop-editor-hint {
-    display: none; /* demasiado texto en pantalla pequeña */
+    display: none;
+    /* demasiado texto en pantalla pequeña */
   }
 
   .crop-rotate-btn span {
-    display: none; /* solo ícono en móvil */
+    display: none;
+    /* solo ícono en móvil */
   }
 
   .crop-rotate-btn {
@@ -885,4 +909,1187 @@ body {
   .crop-editor-tip {
     order: -1;
   }
+}
+
+/* ============================================================
+   MÓDULO DE VENTAS
+   ============================================================ */
+
+/* ── Panel de agregar fecha (compartido entre tiendas) ── */
+.grupo-add-fecha-panel {
+  background: white;
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border-left: 4px solid #10b981;
+  animation: fadeIn 0.18s ease;
+}
+
+.grupo-add-fecha-titulo {
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #f0fdf4, #f8fafc);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-text);
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.grupo-add-fecha-body {
+  padding: 16px 18px;
+}
+
+/* ── Botón Ventas en Navbar ── */
+.btn-ventas-activo {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, .40);
+}
+
+.btn-ventas-activo:hover {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, .50);
+}
+
+.btn-ventas-inactivo {
+  background: rgba(255, 255, 255, .08);
+  color: #d1fae5;
+  border: 1px solid rgba(16, 185, 129, .35);
+}
+
+.btn-ventas-inactivo:hover {
+  background: rgba(16, 185, 129, .18);
+  color: #10b981;
+  border-color: #10b981;
+}
+
+/* ── Botón toggle "Total pendiente" ── */
+.btn-pendiente-activo {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, .40);
+}
+
+.btn-pendiente-activo:hover {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+}
+
+.btn-pendiente-inactivo {
+  background: rgba(255, 255, 255, .08);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, .40);
+}
+
+.btn-pendiente-inactivo:hover {
+  background: rgba(245, 158, 11, .18);
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+
+/* ── Panel de total pendiente ── */
+.panel-pendiente {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 2px solid #f59e0b;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, .18);
+  animation: fadeIn 0.2s ease;
+}
+
+.panel-pendiente-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(245, 158, 11, .25);
+  flex-wrap: wrap;
+}
+
+.panel-pendiente-icono {
+  font-size: 1.8rem;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.panel-pendiente-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.panel-pendiente-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #92400e;
+}
+
+.panel-pendiente-detalle {
+  font-size: 0.75rem;
+  color: #b45309;
+  margin-top: 2px;
+}
+
+.panel-pendiente-total {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #d97706;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.panel-pendiente-total span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b45309;
+}
+
+/* Desglose por grupo */
+.panel-pendiente-desglose {
+  padding: 6px 0;
+}
+
+.panel-pendiente-fila {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  border-bottom: 1px solid rgba(245, 158, 11, .15);
+  flex-wrap: wrap;
+}
+
+.panel-pendiente-fila:last-child {
+  border-bottom: none;
+}
+
+.panel-pendiente-fila:hover {
+  background: rgba(245, 158, 11, .08);
+}
+
+.panel-pendiente-grupo-id {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #78350f;
+}
+
+.panel-pendiente-saldo {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #d97706;
+  white-space: nowrap;
+}
+
+.panel-pendiente-vacio {
+  padding: 12px 20px;
+  font-size: 0.88rem;
+  color: #065f46;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .panel-pendiente-total {
+    font-size: 1.5rem;
+  }
+  .panel-pendiente-fila {
+    padding: 8px 14px;
+    gap: 7px;
+  }
+}
+
+/* ── Contenedor principal de ventas ── */
+.ventas-container {
+  animation: fadeIn 0.22s ease;
+}
+
+.ventas-titulo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.ventas-breadcrumb {
+  font-size: 0.78rem;
+}
+
+/* ── Badges de estado ── */
+.estado-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.estado-pagado {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+.estado-pendiente {
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fca5a5;
+}
+
+.estado-adelanto {
+  background: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fcd34d;
+}
+
+/* ── Lista de grupos ── */
+.grupos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.grupo-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.grupo-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.grupo-card-franja {
+  width: 6px;
+  flex-shrink: 0;
+}
+
+.grupo-card-franja.estado-pagado    { background: #059669; }
+.grupo-card-franja.estado-pendiente { background: #dc2626; }
+.grupo-card-franja.estado-adelanto  { background: #d97706; }
+
+.grupo-card-body {
+  padding: 16px 20px;
+  flex: 1;
+}
+
+.grupo-card-id {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.grupo-fechas {
+  font-size: 0.88rem;
+}
+
+/* ── Modal panels (reutilizable en GrupoModal y VentaModal) ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, .60);
+  backdrop-filter: blur(6px);
+  z-index: 1060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal-panel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .28);
+  width: 100%;
+  max-height: calc(100dvh - 24px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: cropSlideUp 0.18s ease;
+}
+
+.modal-panel--md { max-width: 520px; }
+.modal-panel--lg { max-width: 680px; }
+
+.modal-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.modal-panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.modal-panel-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.modal-panel-close:hover {
+  background: #f1f5f9;
+  color: var(--color-text);
+}
+
+.modal-panel-body {
+  padding: 20px 22px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Selector de estado en GrupoModal ── */
+.gm-estado-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+}
+
+.gm-estado-btn:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+/* ── Grid de tiendas ── */
+.tiendas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 700px) {
+  .tiendas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Panel de tienda */
+.tienda-panel {
+  background: white;
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.tienda-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tienda-titulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.tienda-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.tienda-icono--1 {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  color: #2563eb;
+}
+
+.tienda-icono--2 {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  color: #16a34a;
+}
+
+/* Formulario inline agregar fecha */
+.tienda-add-fecha {
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  animation: fadeIn 0.15s ease;
+}
+
+/* Lista de fechas */
+.tienda-fechas-lista {
+  padding: 8px 0;
+}
+
+/* Item de fecha */
+.fecha-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 8px;
+  transition: background var(--transition-fast);
+}
+
+.fecha-item:last-child { border-bottom: none; }
+
+.fecha-item:hover { background: #f8fafc; }
+
+.fecha-item--finde {
+  background: linear-gradient(90deg, #fffbeb, transparent);
+}
+
+.fecha-item--finde:hover { background: #fef9ec; }
+
+.fecha-item-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fecha-dia-semana {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 28px;
+}
+
+.fecha-valor {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.badge-finde {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.fecha-item-acciones {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Resumen rápido de fecha ── */
+.fecha-resumen-rapido {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fecha-resumen-item {
+  background: white;
+  border-radius: 10px;
+  padding: 10px 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 120px;
+}
+
+.fecha-resumen-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.fecha-resumen-valor {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+/* ── Lista de ventas (FechaVentas) ── */
+.ventas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.venta-fila {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  transition: box-shadow var(--transition-fast);
+}
+
+.venta-fila:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.venta-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  min-width: 24px;
+}
+
+.venta-img-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f1f5f9;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.venta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 3px;
+}
+
+.venta-img-placeholder {
+  font-size: 1.4rem;
+  color: #94a3b8;
+}
+
+.venta-info { min-width: 0; }
+
+.venta-nombre {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-producto-grande {
+  background: #ede9fe;
+  color: #5b21b6;
+  border: 1px solid #c4b5fd;
+  font-size: 0.68rem;
+  padding: 1px 7px;
+}
+
+.badge-producto-pequeno {
+  background: #e0f2fe;
+  color: #075985;
+  border: 1px solid #bae6fd;
+  font-size: 0.68rem;
+  padding: 1px 7px;
+}
+
+.venta-precios {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+  min-width: 110px;
+}
+
+.venta-precio-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.venta-precio-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.venta-precio-base {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #d97706;
+}
+
+.venta-precio-vendido {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #059669;
+}
+
+.venta-ganancia-col {
+  flex-shrink: 0;
+}
+
+.venta-ganancia-badge {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  border-radius: 10px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.venta-puntos-badge {
+  background: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.venta-acciones {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── VentaModal: dropdown de productos ── */
+.vm-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  z-index: 100;
+  max-height: 240px;
+  overflow-y: auto;
+  animation: fadeIn 0.12s ease;
+}
+
+.vm-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.vm-dropdown-item:hover { background: #f1f5f9; }
+
+.vm-dropdown-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #f8fafc;
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.vm-dropdown-nombre {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.vm-dropdown-precio { font-size: 0.75rem; }
+
+/* Preview del producto seleccionado */
+.vm-producto-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f0fdf4;
+  border: 1px solid #6ee7b7;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.vm-producto-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: white;
+  padding: 2px;
+}
+
+/* Preview de ganancia */
+.vm-ganancia-preview {
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.vm-ganancia-positiva {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+.vm-ganancia-puntos {
+  background: #fef3c7;
+  color: #78350f;
+  border: 1px solid #fcd34d;
+}
+
+/* Botones radio de tamaño */
+.vm-obs-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  color: var(--color-muted);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.vm-obs-btn:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.vm-obs-btn--activo {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* ── Reporte de grupo ── */
+/* Tarjetas de totales superiores */
+.reporte-totales-top {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .reporte-totales-top { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .reporte-totales-top { grid-template-columns: 1fr; }
+}
+
+.reporte-total-card {
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.reporte-total-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+}
+
+.reporte-total-card--ganancia {
+  background: white;
+  border-top: 4px solid #10b981;
+}
+
+.reporte-total-card--puntos {
+  background: white;
+  border-top: 4px solid #f59e0b;
+}
+
+.reporte-total-card--salario {
+  background: white;
+  border-top: 4px solid #0ea5e9;
+}
+
+.reporte-total-card--real {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  border-top: 4px solid #60a5fa;
+  color: white;
+}
+
+.reporte-total-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+
+.reporte-total-card--real .reporte-total-label {
+  color: rgba(255, 255, 255, .75);
+}
+
+.reporte-total-valor {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--color-text);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.reporte-total-valor span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.reporte-total-card--real .reporte-total-valor,
+.reporte-total-card--real .reporte-total-valor span {
+  color: white;
+}
+
+.reporte-total-valor--grande {
+  font-size: 2rem;
+}
+
+.reporte-total-detalle {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-top: 6px;
+}
+
+.reporte-total-card--real .reporte-total-detalle {
+  color: rgba(255, 255, 255, .65);
+}
+
+/* Grid de dos tiendas en el reporte */
+.reporte-tiendas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 700px) {
+  .reporte-tiendas-grid { grid-template-columns: 1fr; }
+}
+
+.reporte-tienda-col {
+  background: white;
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.reporte-tienda-titulo {
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.reporte-tienda-titulo--1 {
+  background: linear-gradient(90deg, #eff6ff, transparent);
+  color: #1d4ed8;
+}
+
+.reporte-tienda-titulo--2 {
+  background: linear-gradient(90deg, #f0fdf4, transparent);
+  color: #16a34a;
+}
+
+.reporte-fecha-bloque {
+  padding: 0 0 4px;
+}
+
+.reporte-fecha-header {
+  background: #f8fafc;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.reporte-fecha-header--finde {
+  background: linear-gradient(90deg, #fffbeb, #f8fafc);
+}
+
+.reporte-sin-ventas {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Tabla de reporte */
+.reporte-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.reporte-tabla th {
+  padding: 6px 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.reporte-tabla td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.reporte-tabla tr:last-child td { border-bottom: none; }
+
+.reporte-prod-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #f8fafc;
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.reporte-ganancia-cell {
+  color: #059669;
+  font-weight: 700;
+}
+
+.reporte-puntos-cell {
+  color: #d97706;
+  font-weight: 700;
+}
+
+.reporte-neto-cell {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* Fórmula de cálculo */
+.reporte-formula {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.reporte-formula-titulo {
+  padding: 10px 16px;
+  background: #f8fafc;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--color-text);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.reporte-formula-body {
+  padding: 4px 0;
+}
+
+.reporte-formula-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 16px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 12px;
+}
+
+.reporte-formula-row:last-child { border-bottom: none; }
+
+.reporte-formula-row--subtotal {
+  background: #f0fdf4;
+  font-weight: 600;
+}
+
+.reporte-formula-row--total {
+  background: linear-gradient(90deg, #eff6ff, #f0fdf4);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text);
+  padding: 12px 16px;
+}
+
+/* Badges de días */
+.reporte-dia-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.reporte-dia-badge--finde {
+  background: #fef3c7;
+  border-color: #fcd34d;
+  color: #78350f;
+}
+
+/* Saldo pendiente (estado Adelanto) */
+.reporte-saldo-pendiente {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #fff7ed, #fef3c7);
+  border: 2px solid #f59e0b;
+  border-radius: 14px;
+  padding: 16px 22px;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, .20);
+  animation: fadeIn 0.2s ease;
+}
+
+.reporte-saldo-pendiente--negativo {
+  background: linear-gradient(135deg, #f0fdf4, #d1fae5);
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, .20);
+}
+
+.reporte-saldo-icono {
+  font-size: 2rem;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.reporte-saldo-pendiente--negativo .reporte-saldo-icono {
+  color: #059669;
+}
+
+.reporte-saldo-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.reporte-saldo-titulo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #78350f;
+}
+
+.reporte-saldo-pendiente--negativo .reporte-saldo-titulo {
+  color: #065f46;
+}
+
+.reporte-saldo-detalle {
+  font-size: 0.78rem;
+  color: #92400e;
+  margin-top: 3px;
+}
+
+.reporte-saldo-pendiente--negativo .reporte-saldo-detalle {
+  color: #047857;
+}
+
+.reporte-saldo-monto {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #d97706;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.reporte-saldo-pendiente--negativo .reporte-saldo-monto {
+  color: #059669;
+}
+
+@media (max-width: 500px) {
+  .reporte-saldo-pendiente {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .reporte-saldo-monto {
+    font-size: 1.4rem;
+    width: 100%;
+    text-align: right;
+  }
+}
+
+/* ── Responsive móvil para ventas ── */
+@media (max-width: 576px) {
+  .ventas-titulo {
+    font-size: 1.15rem;
+  }
+
+  .venta-fila {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .venta-precios {
+    min-width: 90px;
+  }
+
+  .reporte-tabla th,
+  .reporte-tabla td {
+    padding: 5px 7px;
+    font-size: 0.76rem;
+  }
+}
+
+/* Animación de giro para el ícono de recarga */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin {
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
 }

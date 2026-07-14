@@ -3,11 +3,13 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
+import VentasView from './components/VentasView';
 import './App.css';
 
 function AppContent() {
-  const { usuario, cargando } = useAuth();
+  const { usuario, cargando, esAdmin } = useAuth();
   const [modalCrear, setModalCrear] = useState(false);
+  const [vistaActual, setVistaActual] = useState('productos'); // 'productos' | 'ventas'
 
   // Lógica del botón scroll-to-top (hooks SIEMPRE antes de cualquier return)
   const [mostrarScrollTop, setMostrarScrollTop] = useState(false);
@@ -46,12 +48,28 @@ function AppContent() {
   // Con sesión → Dashboard
   return (
     <>
-      <Navbar onNuevoProducto={() => setModalCrear(true)} />
+      <Navbar
+        onNuevoProducto={() => setModalCrear(true)}
+        onVerVentas={() => { if (esAdmin) setVistaActual(v => v === 'ventas' ? 'productos' : 'ventas'); }}
+        vistaActual={vistaActual}
+      />
       <main id="main-content">
-        <ProductList
-          modalCrear={modalCrear}
-          onCerrarCrear={() => setModalCrear(false)}
-        />
+        {vistaActual === 'productos' ? (
+          <ProductList
+            modalCrear={modalCrear}
+            onCerrarCrear={() => setModalCrear(false)}
+          />
+        ) : (
+          esAdmin ? (
+            <VentasView onVolver={() => setVistaActual('productos')} />
+          ) : (
+            // Visitante no puede ver ventas — redirigir a productos
+            <ProductList
+              modalCrear={modalCrear}
+              onCerrarCrear={() => setModalCrear(false)}
+            />
+          )
+        )}
       </main>
 
       {/* Botón flotante Volver al Inicio */}

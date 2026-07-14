@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 
-function Navbar({ onNuevoProducto }) {
+function Navbar({ onNuevoProducto, onVerVentas, vistaActual }) {
   const { usuario, esAdmin, logout } = useAuth();
 
   return (
@@ -33,9 +33,24 @@ function Navbar({ onNuevoProducto }) {
               id="btn-nuevo-producto"
               className="btn btn-warning btn-sm fw-semibold d-flex align-items-center gap-1"
               onClick={onNuevoProducto}
+              disabled={vistaActual !== 'productos'}
+              title={vistaActual !== 'productos' ? 'Volvé a Productos para crear uno nuevo' : 'Nuevo producto'}
             >
               <i className="bi bi-plus-lg"></i>
               <span className="d-none d-sm-inline">Nuevo</span>
+            </button>
+          )}
+
+          {/* Botón Ventas — solo admin */}
+          {esAdmin && (
+            <button
+              id="btn-ventas"
+              className={`btn btn-sm fw-semibold d-flex align-items-center gap-1 ${vistaActual === 'ventas' ? 'btn-ventas-activo' : 'btn-ventas-inactivo'}`}
+              onClick={onVerVentas}
+              title="Módulo de ventas"
+            >
+              <i className="bi bi-graph-up-arrow"></i>
+              <span className="d-none d-sm-inline">Ventas</span>
             </button>
           )}
 
@@ -56,3 +71,4 @@ function Navbar({ onNuevoProducto }) {
 }
 
 export default Navbar;
+
